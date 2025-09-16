@@ -1,0 +1,10 @@
+{
+    "name": "menus/shell",
+    "description": "Shell command for php",
+    "autoload": {
+        "psr-4": {
+            "Menus\\Shell\\": "src/"
+        }
+    },
+    "require": {}
+}
