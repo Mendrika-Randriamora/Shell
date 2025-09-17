@@ -120,7 +120,7 @@ class Shell
             $dir .= "$arr[$i]/";
         }
 
-        if (!mkdir($dir, 0777, true) and !is_dir($dir)) {
+        if (!is_dir($dir) and !mkdir($dir, 0777, true)) {
             echo "Erreur de creation du dossier", PHP_EOL;
             die();
         }
