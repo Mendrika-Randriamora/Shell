@@ -1,8 +1,13 @@
 <?php
 
+return <<<PHP
+<?php
+
 namespace Menus\Shell\Controller;
 
-class $name_controller
+require_once "./vendor/autoload.php";
+
+class $classname
 {
     public function index()
     {
@@ -12,3 +17,4 @@ class $name_controller
         };    
     }
 }
+PHP;

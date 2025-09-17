@@ -38,6 +38,9 @@ class Shell
             case 'view':
                 $this->view($filename);
                 break;
+            case 'model':
+                $this->model($filename);
+                break;
             default:
                 echo "Commande invalide", PHP_EOL;
                 break;
@@ -53,23 +56,8 @@ class Shell
         }
         $filename = str_replace(".", "/", $filename);
         $path = "./src/Controller/" . $filename . ".php";
-        $data = <<<PHP
-<?php
-
-namespace Menus\Shell\Controller;
-
-class $classname
-{
-    public function index()
-    {
-        return function(/* vos paramètres */) 
-        {
-            # Votre code ici .....
-        };    
-    }
-}
-PHP;
-        $this->gererate_file($path, $data);
+        $data = require "./source/controller.php";
+        $this->generate_file($path, $data);
     }
 
     private function view(string $filename)
@@ -82,16 +70,24 @@ PHP;
 
         $filename = str_replace(".", "/", $filename);
         $path = "./views/" . $filename . ".php";
-        $data = <<<PHP
-<div>
-    # Bonne continuation 
-    # Nom du view : $viewname
-</div>
-PHP;
-        $this->gererate_file($path, $data);
+        $data = require "./source/views.php";
+        $this->generate_file($path, $data);
     }
 
-    private function gererate_file(string $path, string $data)
+    private function model(string $filename)
+    {
+        if (str_contains($filename, ".")) {
+            $modelname = $this->create_dir($filename, 'model');
+        } else {
+            $modelname = $filename;
+        }
+        $filename = str_replace(".", "/", $filename);
+        $path = "./src/Model/" . $filename . ".php";
+        $data = require "./source/model.php";
+        $this->generate_file($path, $data);
+    }
+
+    private function generate_file(string $path, string $data)
     {
         $fl = fopen($path, "x");
         fwrite($fl, $data);
@@ -113,6 +109,9 @@ PHP;
             case 'view':
                 $dir = "./views/";
                 break;
+            case 'model':
+                $dir = "./src/Model/";
+                break;
             default:
                 echo "Erreur `create_dir`";
                 die();
@@ -121,7 +120,7 @@ PHP;
             $dir .= "$arr[$i]/";
         }
 
-        if (!mkdir($dir, 0777, true)) {
+        if (!mkdir($dir, 0777, true) and !is_dir($dir)) {
             echo "Erreur de creation du dossier", PHP_EOL;
             die();
         }
