@@ -1,2 +1,15 @@
 #!/usr/bin/php
 <?php
+
+require_once "./vendor/autoload.php";
+
+use Menus\Shell\Shell;
+
+$shell = new Shell();
+
+try {
+    $shell->execute($argc, $argv);
+} catch (\Throwable $th) {
+    echo $th->getMessage();
+    exit();
+}
