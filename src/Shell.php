@@ -46,14 +46,19 @@ class Shell
 
     private function controller(string $filename)
     {
-
+        if (str_contains($filename, ".")) {
+            $classname = $this->create_dir($filename, 'controller');
+        } else {
+            $classname = $filename;
+        }
+        $filename = str_replace(".", "/", $filename);
         $path = "./src/Controller/" . $filename . ".php";
         $data = <<<PHP
 <?php
 
 namespace Menus\Shell\Controller;
 
-class $filename
+class $classname
 {
     public function index()
     {
@@ -69,10 +74,18 @@ PHP;
 
     private function view(string $filename)
     {
+        if (str_contains($filename, '.')) {
+            $viewname = $this->create_dir($filename, 'view');
+        } else {
+            $viewname = $filename;
+        }
+
+        $filename = str_replace(".", "/", $filename);
         $path = "./views/" . $filename . ".php";
         $data = <<<PHP
 <div>
-    # Bonne continuation
+    # Bonne continuation 
+    # Nom du view : $viewname
 </div>
 PHP;
         $this->gererate_file($path, $data);
@@ -83,5 +96,35 @@ PHP;
         $fl = fopen($path, "x");
         fwrite($fl, $data);
         fclose($fl);
+    }
+
+    private function create_dir(string $path, string $type): string
+    {
+        $arr = [];
+        $tok = strtok($path, ".");
+        while ($tok !== false) {
+            $arr[] = $tok;
+            $tok = strtok(".");
+        }
+        switch ($type) {
+            case 'controller':
+                $dir = "./src/Controller/";
+                break;
+            case 'view':
+                $dir = "./views/";
+                break;
+            default:
+                echo "Erreur `create_dir`";
+                die();
+        }
+        for ($i = 0; $i < count($arr) - 1; $i++) {
+            $dir .= "$arr[$i]/";
+        }
+
+        if (!mkdir($dir, 0777, true)) {
+            echo "Erreur de creation du dossier", PHP_EOL;
+            die();
+        }
+        return $arr[count($arr) - 1];
     }
 }
