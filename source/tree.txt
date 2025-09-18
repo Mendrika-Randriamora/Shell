@@ -1,0 +1,20 @@
+Shell/
+    ├── source/
+    │   ├── controller.php
+    │   ├── list.txt
+    │   ├── model.php
+    │   ├── tree.txt
+    │   └── views.php
+    ├── src/
+    │   ├── Controller/
+    │   │   └── .... (all controller generated)
+    │   ├── Model/
+    │   │   └── ... (all model generated)
+    │   └── Shell.php
+    ├── vendor/ 
+    ├── views/
+    │   └── ... (all view generated)
+    ├── .gitignore
+    ├── README.md
+    ├── composer.json
+    └── shell

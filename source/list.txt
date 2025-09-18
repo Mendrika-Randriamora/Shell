@@ -1,0 +1,5 @@
+make:controller ................... Generate a new controller
+make:view ......................... Generate a new view
+make:model ........................ Generate a new model
+doc:list .......................... Show all command
+doc:tree .......................... Show project tree

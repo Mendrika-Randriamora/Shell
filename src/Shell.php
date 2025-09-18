@@ -10,7 +10,7 @@ class Shell
 
     private function is_valid(int $argc, array $argv): bool
     {
-        return $argc == 3 and $argv[0] == "shell" and str_contains($argv[1], ":");
+        return $argv[0] == "shell" and str_contains($argv[1], ":");
     }
 
     private function prepare_data(int $argc, array $argv)/* : mixed|null */
@@ -22,7 +22,10 @@ class Shell
                 $data[] = $tok;
                 $tok = strtok(":");
             }
-            $data[] = $argv[2];
+            if (isset($argv[2]))
+                $data[] = $argv[2];
+            else
+                $data[] = null;
 
             return $data;
         } else {
@@ -39,9 +42,15 @@ class Shell
 
             switch ($action) {
                 case 'make':
-                    $this->create($filename, $type);
+                    if ($filename != null) {
+                        $this->create($filename, $type);
+                    } else {
+                        echo "Filename doesn't exist", PHP_EOL;
+                        die();
+                    }
                     break;
-                case '':
+                case 'doc':
+                    $this->doc($type);
                     break;
                 default:
                     echo "Commande invalide", PHP_EOL;
@@ -149,5 +158,13 @@ class Shell
             die();
         }
         return $arr[count($arr) - 1];
+    }
+
+    private function doc(string $type)
+    {
+        $data = @file_get_contents("./source/" . $type . ".txt") or
+            die("Impossible d'excecuter\n");
+        echo $data, PHP_EOL;
+        exit();
     }
 }
