@@ -23,3 +23,9 @@ php shell make:controller Admin.UserController
 ```
 
 This will create the folder `src/Controller/Admin` and the file `UserController.php` inside it.
+
+You can show all command with
+
+```sh
+php shell doc:list
+```
