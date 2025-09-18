@@ -4,6 +4,10 @@ namespace Menus\Shell;
 
 class Shell
 {
+    const CONTROLLER_PATH = "./src/Controller/";
+    const VEIW_PATH = "./views/";
+    const MODEL_PATH = "./src/Model/";
+
     private function is_valid(int $argc, array $argv): bool
     {
         return $argc == 4 and $argv[0] == "shell";
@@ -55,7 +59,7 @@ class Shell
             $classname = $filename;
         }
         $filename = str_replace(".", "/", $filename);
-        $path = "./src/Controller/" . $filename . ".php";
+        $path = self::CONTROLLER_PATH . $filename . ".php";
         $data = require "./source/controller.php";
         $this->generate_file($path, $data);
     }
@@ -69,7 +73,7 @@ class Shell
         }
 
         $filename = str_replace(".", "/", $filename);
-        $path = "./views/" . $filename . ".php";
+        $path = self::VEIW_PATH . $filename . ".php";
         $data = require "./source/views.php";
         $this->generate_file($path, $data);
     }
@@ -82,7 +86,7 @@ class Shell
             $modelname = $filename;
         }
         $filename = str_replace(".", "/", $filename);
-        $path = "./src/Model/" . $filename . ".php";
+        $path = self::MODEL_PATH . $filename . ".php";
         $data = require "./source/model.php";
         $this->generate_file($path, $data);
     }
@@ -104,13 +108,13 @@ class Shell
         }
         switch ($type) {
             case 'controller':
-                $dir = "./src/Controller/";
+                $dir = self::CONTROLLER_PATH;
                 break;
             case 'view':
-                $dir = "./views/";
+                $dir = self::VEIW_PATH;
                 break;
             case 'model':
-                $dir = "./src/Model/";
+                $dir = self::MODEL_PATH;
                 break;
             default:
                 echo "Erreur `create_dir`";
