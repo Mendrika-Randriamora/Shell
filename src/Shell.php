@@ -162,7 +162,7 @@ class Shell
 
     private function doc(string $type)
     {
-        $data = @file_get_contents("./source/" . $type . ".txt") or
+        $data = @file_get_contents("./source/doc/" . $type . ".txt") or
             die("Impossible d'excecuter\n");
         echo $data, PHP_EOL;
         exit();
