@@ -10,16 +10,36 @@ class Shell
 
     private function is_valid(int $argc, array $argv): bool
     {
-        return $argc == 4 and $argv[0] == "shell";
+        return $argc == 3 and $argv[0] == "shell" and str_contains($argv[1], ":");
+    }
+
+    private function prepare_data(int $argc, array $argv)/* : mixed|null */
+    {
+        if ($this->is_valid($argc, $argv)) {
+            $data = [];
+            $tok = strtok($argv[1], ":");
+            while ($tok !== false) {
+                $data[] = $tok;
+                $tok = strtok(":");
+            }
+            $data[] = $argv[2];
+
+            return $data;
+        } else {
+            echo "Erreur de préparation des données", PHP_EOL;
+            die();
+        }
     }
 
     public function execute(int $argc, array $argv)
     {
         if ($this->is_valid($argc, $argv)) {
 
-            switch ($argv[1]) {
+            list($action, $type, $filename) = $this->prepare_data($argc, $argv);
+
+            switch ($action) {
                 case 'make':
-                    $this->create($argv[3], $argv[2]);
+                    $this->create($filename, $type);
                     break;
                 case '':
                     break;
