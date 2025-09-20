@@ -2,63 +2,34 @@
 
 namespace Menus\Shell;
 
+use Menus\Shell\Cli\AgrIn;
+
 class Shell
 {
     const CONTROLLER_PATH = "./src/Controller/";
     const VEIW_PATH = "./views/";
     const MODEL_PATH = "./src/Model/";
 
-    private function is_valid(int $argc, array $argv): bool
+    public function execute(AgrIn $input)
     {
-        return $argv[0] == "shell" and str_contains($argv[1], ":");
-    }
 
-    private function prepare_data(int $argc, array $argv)/* : mixed|null */
-    {
-        if ($this->is_valid($argc, $argv)) {
-            $data = [];
-            $tok = strtok($argv[1], ":");
-            while ($tok !== false) {
-                $data[] = $tok;
-                $tok = strtok(":");
-            }
-            if (isset($argv[2]))
-                $data[] = $argv[2];
-            else
-                $data[] = null;
+        list($action, $type, $filename) = $input->prepare();
 
-            return $data;
-        } else {
-            echo "Erreur de préparation des données", PHP_EOL;
-            die();
-        }
-    }
-
-    public function execute(int $argc, array $argv)
-    {
-        if ($this->is_valid($argc, $argv)) {
-
-            list($action, $type, $filename) = $this->prepare_data($argc, $argv);
-
-            switch ($action) {
-                case 'make':
-                    if ($filename != null) {
-                        $this->create($filename, $type);
-                    } else {
-                        echo "Filename doesn't exist", PHP_EOL;
-                        die();
-                    }
-                    break;
-                case 'doc':
-                    $this->doc($type);
-                    break;
-                default:
-                    echo "Commande invalide", PHP_EOL;
-                    break;
-            }
-        } else {
-            echo "Commande invalide", PHP_EOL;
-            exit();
+        switch ($action) {
+            case 'make':
+                if ($filename != null) {
+                    $this->create($filename, $type);
+                } else {
+                    echo "Filename doesn't exist", PHP_EOL;
+                    die();
+                }
+                break;
+            case 'doc':
+                $this->doc($type);
+                break;
+            default:
+                echo "Commande invalide", PHP_EOL;
+                break;
         }
     }
 

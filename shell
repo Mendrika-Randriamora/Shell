@@ -3,12 +3,13 @@
 
 require_once "./vendor/autoload.php";
 
+use Menus\Shell\Cli\AgrIn;
 use Menus\Shell\Shell;
 
 $shell = new Shell();
 
 try {
-    $shell->execute($argc, $argv);
+    $shell->execute(new AgrIn);
 } catch (\Throwable $th) {
     echo $th->getMessage();
     exit();
