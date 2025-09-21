@@ -4,9 +4,11 @@
 require_once "./vendor/autoload.php";
 
 use Menus\Shell\Cli\AgrIn;
+use Menus\Shell\Database\Database;
 use Menus\Shell\Shell;
 
 $shell = new Shell();
+$db = new Database();
 
 try {
     $shell->execute(new AgrIn);
