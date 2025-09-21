@@ -1,20 +1,29 @@
-Shell/
-    ├── source/
-    │   ├── controller.php
-    │   ├── list.txt
-    │   ├── model.php
-    │   ├── tree.txt
-    │   └── views.php
-    ├── src/
-    │   ├── Controller/
-    │   │   └── .... (all controller generated)
-    │   ├── Model/
-    │   │   └── ... (all model generated)
-    │   └── Shell.php
-    ├── vendor/ 
-    ├── views/
-    │   └── ... (all view generated)
-    ├── .gitignore
-    ├── README.md
-    ├── composer.json
-    └── shell
+# File Tree: shell
+
+📁 Shell/
+├── 📁 .git/ (hidden)
+├── 📁 source/
+│   ├── 📁 doc/
+│   │   ├── 📄 list.txt
+│   │   └── 📄 tree.txt
+│   ├── 🐘 controller.php
+│   ├── 🐘 model.php
+│   └── 🐘 views.php
+├── 📁 src/
+│   ├── 📁 Cli/
+│   │   └── 🐘 AgrIn.php
+│   ├── 📁 Controller/
+│   │   └── 🐘 Test.php 
+│   │   └── 🐘 .... (all controllers generated)
+│   ├── 📁 Model/
+│   └── 🐘 Shell.php
+│   └── 🐘 ..... (all models generated)
+├── 📁 vendor/  (hidden)
+├── 📁 views/
+│   └── 🐘 index.php
+│   └── 🐘 ...... (all views generated)
+├── 🚫 .gitignore
+├── 📖 README.md
+├── 📄 composer.json
+├── 📄 shell
+└── 🐘 test.php (hidden)
