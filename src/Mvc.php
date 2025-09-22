@@ -12,7 +12,15 @@ abstract class Mvc
     const VEIW_PATH = "./views/";
     const MODEL_PATH = "./src/Model/";
 
-    protected static function create_dir(string $path, string $type): string
+    /**
+     * Pour la creation des dossiers 
+     * @param string $path chemin à créer
+     * @param string $type type de fichier à créer
+     * Le type permet de savoir la racine deu dossier à créer
+     * 
+     * @return string nom du fichier 
+     */
+    protected static function create_dir($path, $type)
     {
         $arr = [];
         $tok = strtok($path, ".");

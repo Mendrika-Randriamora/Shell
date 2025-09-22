@@ -12,6 +12,12 @@ class Migration
     const MIGRATION_SOURCE = "./source/migration.php";
     public string $migration_name;
 
+    /**
+     * Créer un ficher de migration
+     * @param string $filename nom du fichier
+     * 
+     * @return void
+     */
     public static function create($filename)
     {
         $data = @file_get_contents(self::MIGRATION_SOURCE) or

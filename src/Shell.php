@@ -10,8 +10,13 @@ use Menus\Shell\Mvc\View;
 
 class Shell
 {
-
-    public function execute(AgrIn $input)
+    /**
+     * Methode d'entrée dans la classe Shell
+     * @param AgrIn $input parametres de la ligne de commande
+     * 
+     * @return void
+     */
+    public function execute($input)
     {
 
         list($action, $type, $filename) = $input->prepare();
@@ -37,7 +42,14 @@ class Shell
         }
     }
 
-    private function create(string $filename, string $type)
+    /**
+     * Methode de création de tous les types de fichier dispo dans le doc
+     * @param string $filename nom du fichier
+     * @param string $type type de fichier à créer
+     * 
+     * @return void
+     */
+    private function create($filename, $type)
     {
         switch ($type) {
             case 'controller':
@@ -58,7 +70,13 @@ class Shell
         }
     }
 
-    private function doc(string $type)
+    /**
+     * Afficher le doc du projet (ex: toutes les commandes)
+     * @param string $type type de doc qu'on veut voir
+     * 
+     * @return void
+     */
+    private function doc($type)
     {
         $data = @file_get_contents("./source/doc/" . $type . ".txt") or
             die("Impossible d'excecuter\n");
@@ -66,7 +84,14 @@ class Shell
         exit();
     }
 
-    public function do(string $filename, string $type)
+    /**
+     * Excecuter un ficher ou une suite de logique de programme
+     * @param string $filename nom du ficher à éxcecuter
+     * @param string $type type d'éxcecution 
+     * 
+     * @return void
+     */
+    private function do($filename, $type)
     {
         switch ($type) {
             case 'migration':

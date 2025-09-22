@@ -7,7 +7,12 @@ class Database
     const DB_PATH = "./source/database.sqlite";
     private \PDO|null $pdo = null;
 
-    public function connexion(): \PDO | null
+    /**
+     * Connexion à la base de donnée
+     * 
+     * @return \PDO|null
+     */
+    public function connexion()
     {
         try {
             if (!$this->pdo)
