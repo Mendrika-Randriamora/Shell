@@ -2,8 +2,12 @@
 
 namespace Menus\Shell;
 
+use Menus\Shell\Trait\TraitFile;
+
 abstract class Mvc
 {
+    use TraitFile;
+
     const CONTROLLER_PATH = "./src/Controller/";
     const VEIW_PATH = "./views/";
     const MODEL_PATH = "./src/Model/";
@@ -39,12 +43,5 @@ abstract class Mvc
             die();
         }
         return $arr[count($arr) - 1];
-    }
-
-    protected static function generate_file(string $path, string $data)
-    {
-        $fl = fopen($path, "x");
-        fwrite($fl, $data);
-        fclose($fl);
     }
 }

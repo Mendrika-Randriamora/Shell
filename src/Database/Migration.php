@@ -2,34 +2,41 @@
 
 namespace Menus\Shell\Database;
 
+use Menus\Shell\Trait\TraitFile;
+
 class Migration
 {
+    use TraitFile;
+
     const MIGRATION_PATH = "./migrations/";
     const MIGRATION_SOURCE = "./source/migration.php";
     public string $migration_name;
 
-    public static function generate_file($filename)
+    public static function create($filename)
     {
         $data = @file_get_contents(self::MIGRATION_SOURCE) or
             die("Erreur de récuperation des données de la migration");
 
-        $file = fopen(self::MIGRATION_PATH . $filename . "_migration.php", "x");
-        fwrite($file, $data);
-        fclose($file);
-
-        echo "File generated", PHP_EOL;
+        $path = self::MIGRATION_PATH . $filename . "_migration.php";
+        self::generate_file($filename, $data);
     }
 
-    public function generate_sql($filename)
+    public static function generate_sql($filename)
     {
         if (!strpos($filename, "_migration.php"))
             $filename .= "_migration.php";
 
-        $data = @require self::MIGRATION_PATH . $filename or
-            die("data non obtenu");
+        /**
+         * Information concernant la table
+         * @var array $data 
+         */
+        $data = require self::MIGRATION_PATH . $filename;
 
         var_dump($data);
     }
 
-    public function migrate() {}
+    public static function migrate(string $filename)
+    {
+        self::generate_sql($filename);
+    }
 }

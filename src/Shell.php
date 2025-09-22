@@ -50,7 +50,7 @@ class Shell
                 Model::create($filename);
                 break;
             case 'migration':
-                Migration::generate_file($filename);
+                Migration::create($filename);
                 break;
             default:
                 echo "Commande invalide", PHP_EOL;
@@ -70,6 +70,7 @@ class Shell
     {
         switch ($type) {
             case 'migration':
+                Migration::migrate($filename);
                 break;
 
             default:
