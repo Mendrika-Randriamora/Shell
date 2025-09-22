@@ -14,11 +14,21 @@ class AgrIn
         $this->argv = $_SERVER["argv"];
     }
 
+    /**
+     * Vérifiction de la validité de la commande
+     * 
+     * @return bool
+     */
     private function is_valid()
     {
         return $this->argv[0] == "shell" and str_contains($this->argv[1], ":");
     }
 
+    /**
+     * Préparation des données avec de les utilisés
+     * 
+     * @return array
+     */
     public function prepare()
     {
         if (!$this->is_valid())

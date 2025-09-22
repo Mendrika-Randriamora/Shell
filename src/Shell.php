@@ -19,6 +19,11 @@ class Shell
     public function execute($input)
     {
 
+        /**
+         * @var string $action action à faire
+         * @var string $type type d'action à faire
+         * @var string $filename nom ou dossier + nom du fichier
+         */
         list($action, $type, $filename) = $input->prepare();
 
         switch ($action) {
@@ -78,6 +83,9 @@ class Shell
      */
     private function doc($type)
     {
+        /** 
+         * @var string|false $data donnée de la dcumentation 
+         */
         $data = @file_get_contents("./source/doc/" . $type . ".txt") or
             die("Impossible d'excecuter\n");
         echo $data, PHP_EOL;

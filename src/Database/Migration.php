@@ -10,7 +10,6 @@ class Migration
 
     const MIGRATION_PATH = "./migrations/";
     const MIGRATION_SOURCE = "./source/migration.php";
-    public string $migration_name;
 
     /**
      * Créer un ficher de migration

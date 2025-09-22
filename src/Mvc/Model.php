@@ -16,7 +16,7 @@ class Model extends Mvc
      * @return void
      * 
      */
-    public static function create(string $filename)
+    public static function create($filename)
     {
         if (str_contains($filename, ".")) {
             $modelname = self::create_dir($filename, 'model');

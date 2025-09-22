@@ -16,7 +16,7 @@ class Controller extends Mvc
      * @return void
      * 
      */
-    public static function create(string $filename)
+    public static function create($filename)
     {
         if (str_contains($filename, ".")) {
             $classname = self::create_dir($filename, 'controller');
