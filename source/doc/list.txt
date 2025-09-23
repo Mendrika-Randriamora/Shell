@@ -1,5 +1,9 @@
 make:controller ................... Generate a new controller
 make:view ......................... Generate a new view
 make:model ........................ Generate a new model
+make:migration .................... Generate a new file for migration
+
+do:migration ...................... Excecute migration
+
 doc:list .......................... Show all command
 doc:tree .......................... Show project tree

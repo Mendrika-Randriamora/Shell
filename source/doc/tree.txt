@@ -1,29 +1,41 @@
 # File Tree: shell
 
 📁 Shell/
-├── 📁 .git/ (hidden)
+├── 📁 .git/ 🚫 (auto-hidden)
+├── 📁 migrations/
 ├── 📁 source/
 │   ├── 📁 doc/
 │   │   ├── 📄 list.txt
 │   │   └── 📄 tree.txt
 │   ├── 🐘 controller.php
+│   ├── 🗄️ database.sqlite 🚫 (auto-hidden)
+│   ├── 🐘 migration.php
 │   ├── 🐘 model.php
 │   └── 🐘 views.php
 ├── 📁 src/
 │   ├── 📁 Cli/
 │   │   └── 🐘 AgrIn.php
 │   ├── 📁 Controller/
-│   │   └── 🐘 Test.php 
-│   │   └── 🐘 .... (all controllers generated)
+│   │   └── 🐘 Test.php 🚫 (auto-hidden)
+│   ├── 📁 Database/
+│   │   ├── 🐘 Database.php
+│   │   ├── 🐘 Migration.php
+│   │   └── 🐘 init_table.php
 │   ├── 📁 Model/
+│   │   └── 🐘 User.php
+│   ├── 📁 Mvc/
+│   │   ├── 🐘 Controller.php
+│   │   ├── 🐘 Model.php
+│   │   └── 🐘 View.php
+│   ├── 📁 Trait/
+│   │   └── 🐘 TraitFile.php
+│   ├── 🐘 Mvc.php
 │   └── 🐘 Shell.php
-│   └── 🐘 ..... (all models generated)
-├── 📁 vendor/  (hidden)
+├── 📁 vendor/ 🚫 (auto-hidden)
 ├── 📁 views/
 │   └── 🐘 index.php
-│   └── 🐘 ...... (all views generated)
 ├── 🚫 .gitignore
 ├── 📖 README.md
 ├── 📄 composer.json
 ├── 📄 shell
-└── 🐘 test.php (hidden)
+└── 🐘 test.php 🚫 (auto-hidden)
