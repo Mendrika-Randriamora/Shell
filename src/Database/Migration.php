@@ -11,6 +11,12 @@ class Migration
     const MIGRATION_PATH = "./migrations/";
     const MIGRATION_SOURCE = "./source/migration.php";
 
+    private static function pdo()
+    {
+        $pdo = new Database();
+        return $pdo->connexion();
+    }
+
     /**
      * Créer un ficher de migration
      * @param string $filename nom du fichier
@@ -23,7 +29,7 @@ class Migration
             die("Erreur de récuperation des données de la migration");
 
         $path = self::MIGRATION_PATH . $filename . "_migration.php";
-        self::generate_file($filename, $data);
+        self::generate_file($path, $data);
     }
 
     public static function generate_sql($filename)
@@ -33,11 +39,18 @@ class Migration
 
         /**
          * Information concernant la table
-         * @var array $data 
+         * @var array $data_table 
          */
-        $data = require self::MIGRATION_PATH . $filename;
+        $data_table = require self::MIGRATION_PATH . $filename;
 
-        var_dump($data);
+        $request = require "./src/Database/init_table.php";
+
+        try {
+            self::pdo()->exec($request);
+            echo "Table created successfully", PHP_EOL;
+        } catch (\Throwable $th) {
+            die("Erreur : " . $th->getMessage());
+        }
     }
 
     public static function migrate(string $filename)
