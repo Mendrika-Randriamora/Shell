@@ -11,10 +11,19 @@ class Migration
     const MIGRATION_PATH = "./migrations/";
     const MIGRATION_SOURCE = "./source/migration.php";
 
+    /**
+     * Connexion à la base de donnée
+     * 
+     * @return \PDO|null
+     */
     private static function pdo()
     {
-        $pdo = new Database();
-        return $pdo->connexion();
+        try {
+            $pdo = new Database();
+            return $pdo->connexion();
+        } catch (\PDOException $e) {
+            die("Erreur : " . $e->getMessage());
+        }
     }
 
     /**
@@ -32,6 +41,12 @@ class Migration
         self::generate_file($path, $data);
     }
 
+    /**
+     * Génération de la table 
+     * @param $filename nom du fichier à qui on va prendre l'info
+     * 
+     * @return void
+     */
     public static function generate_sql($filename)
     {
         if (!strpos($filename, "_migration.php"))
@@ -43,6 +58,10 @@ class Migration
          */
         $data_table = require self::MIGRATION_PATH . $filename;
 
+        /**
+         * Requête à éxcécuter pour la création de la table
+         * @var string $request
+         */
         $request = require "./src/Database/init_table.php";
 
         try {
@@ -53,7 +72,13 @@ class Migration
         }
     }
 
-    public static function migrate(string $filename)
+    /**
+     * Fonction de la migration
+     * @param strin $filename nom du fichier à créer une table
+     * 
+     * @return void
+     */
+    public static function migrate($filename)
     {
         self::generate_sql($filename);
     }
